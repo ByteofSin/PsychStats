@@ -36,8 +36,10 @@ def box_plot(data, title='Box Plot', xlabel='Value'):
     
 
 def correlation_matrix(data):
-    corr = data.corr()
+    corr = data[data.dtypes[data.dtypes == "float64"].index].corr()
     sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
     plt.title("Correlation Matrix")
     plt.show()
 
+def qqplot():
+    return
