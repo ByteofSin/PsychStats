@@ -1,30 +1,3 @@
-def mean(data, key=None):
-    if key is None:
-        return sum(data) / len(data)
-    
-    return sum(data[key]) / len(data[key]) 
-
-def mode(data, key):
-    return
-
-def median(data, key):
-    return
-
-def variance(data, key=None):
-    if key is None:
-        data_values = data
-    else:
-        data_values = data[key]
-
-    sum_of_squares = sum((x - mean(data_values)) ** 2 for x in data_values)
-
-    if len(data_values) > 1:
-        return sum_of_squares / (len(data_values) - 1)
-    return 0
-
-def stddev(data, key=None):
-    return variance(data, key) ** 0.5
-
 def zscore(data, x, key=None):
     if key is None:
         return (x - mean(data)) / stddev(data) if stddev(data) else 0   

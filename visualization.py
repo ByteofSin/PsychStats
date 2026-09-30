@@ -17,6 +17,18 @@ def histogram(data, bins=10, key=None):
 
     plt.show()
 
+def distribution_plot(data, key=None):
+    if key is None:
+        data_values = data
+    else:
+        data_values = data[key]
+
+    sns.displot(data_values, kde=True, color='blue', alpha=0.5)
+    plt.title(f"{key} Distribution" if key is not None else "Distribution")
+    plt.xlabel(key if key is not None else "Value")
+    plt.ylabel("Frequency")
+    plt.show()
+
 def hexbin():
     return
 
@@ -36,10 +48,14 @@ def box_plot(data, title='Box Plot', xlabel='Value'):
     
 
 def correlation_matrix(data):
-    corr = data[data.dtypes[data.dtypes == "float64"].index].corr()
+    numeric_columns = data.select_dtypes(include=['float64', 'int64']).columns
+    corr = data[numeric_columns].corr()
+    
     sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
     plt.title("Correlation Matrix")
     plt.show()
+
+    return corr
 
 def qqplot():
     return
