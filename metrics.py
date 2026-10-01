@@ -1,3 +1,22 @@
+def mean(data, key=None):
+    if key is None:
+        data_values = data
+    else:
+        data_values = data[key]
+    return sum(data_values) / len(data_values) if len(data_values) > 0 else 0   
+
+def stddev(data, key=None):
+    if key is None:
+        data_values = data
+    else:
+        data_values = data[key]
+    n = len(data_values)
+    if n < 2:
+        return 0
+    mean_value = mean(data_values)
+    variance = sum((x - mean_value) ** 2 for x in data_values) / (n - 1)
+    return variance ** 0.5
+
 def zscore(data, x, key=None):
     if key is None:
         return (x - mean(data)) / stddev(data) if stddev(data) else 0   
